@@ -15,11 +15,12 @@
   "author": "Rahul Kumar",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.19.2",
-    "mongoose": "^7.6.3",
     "cors": "^2.8.5",
-    "morgan": "^1.10.0",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.3.1",
+    "mongoose": "^7.6.3",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
