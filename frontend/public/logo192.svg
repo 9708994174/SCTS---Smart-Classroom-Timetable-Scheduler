@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <defs>
+    <linearGradient id="grad192" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="96" cy="96" r="92" fill="url(#grad192)"/>
+  <!-- Scholar Cap / Graduation Cap -->
+  <!-- Cap top (square mortarboard) -->
+  <rect x="48" y="67" width="96" height="15" fill="white" opacity="0.95" rx="2"/>
+  <!-- Cap brim -->
+  <ellipse cx="96" cy="82" rx="58" ry="8" fill="white" opacity="0.9"/>
+  <!-- Cap button in center -->
+  <circle cx="96" cy="74" r="6" fill="white" opacity="0.95"/>
+  <!-- Tassel on the right side -->
+  <line x1="144" y1="74" x2="144" y2="125" stroke="white" stroke-width="5" opacity="0.95" stroke-linecap="round"/>
+  <circle cx="144" cy="125" r="7" fill="white" opacity="0.95"/>
+  <!-- Tassel string details -->
+  <line x1="144" y1="96" x2="152" y2="100" stroke="white" stroke-width="3" opacity="0.8"/>
+  <line x1="144" y1="106" x2="152" y2="110" stroke="white" stroke-width="3" opacity="0.8"/>
+  <!-- Platform name -->
+  <text x="96" y="155" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">SCTS</text>
+</svg>
+

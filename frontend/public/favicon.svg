@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="url(#grad)"/>
+  <!-- Scholar Cap / Graduation Cap -->
+  <!-- Cap top (square mortarboard) -->
+  <rect x="25" y="35" width="50" height="8" fill="white" opacity="0.95" rx="1"/>
+  <!-- Cap brim -->
+  <ellipse cx="50" cy="43" rx="30" ry="4" fill="white" opacity="0.9"/>
+  <!-- Cap button in center -->
+  <circle cx="50" cy="39" r="3" fill="white" opacity="0.95"/>
+  <!-- Tassel on the right side -->
+  <line x1="75" y1="39" x2="75" y2="65" stroke="white" stroke-width="2.5" opacity="0.95" stroke-linecap="round"/>
+  <circle cx="75" cy="65" r="3.5" fill="white" opacity="0.95"/>
+  <!-- Tassel string details -->
+  <line x1="75" y1="50" x2="78" y2="52" stroke="white" stroke-width="1.5" opacity="0.8"/>
+  <line x1="75" y1="55" x2="78" y2="57" stroke="white" stroke-width="1.5" opacity="0.8"/>
+</svg>
+
