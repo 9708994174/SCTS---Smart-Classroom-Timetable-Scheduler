@@ -86,6 +86,19 @@ mongoose.connection.on("error", (err) => {
 });
 
 /* =========================
+   ROOT ROUTE
+========================= */
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    name: "SCTS – Smart Classroom Timetable Scheduler",
+    status: "API is running 🚀",
+    health: "/api/health",
+  });
+});
+
+/* =========================
    ROUTES
 ========================= */
 
