@@ -17,7 +17,6 @@ import {
   DialogContent,
   DialogActions,
   TextField,
-  MenuItem,
   Alert,
   Chip,
 } from '@mui/material';
@@ -27,7 +26,6 @@ import {
   Delete as DeleteIcon,
   Person as PersonIcon,
 } from '@mui/icons-material';
-import { motion } from 'framer-motion';
 import axios from 'axios';
 
 const ManageFaculty = () => {

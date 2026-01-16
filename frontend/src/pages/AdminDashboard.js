@@ -8,7 +8,6 @@ import {
   Card,
   CardContent,
   LinearProgress,
-  Chip,
 } from '@mui/material';
 import {
   Add as AddIcon,
@@ -43,6 +42,7 @@ const AdminDashboard = () => {
     if (stats) {
       calculateMetrics();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stats]);
 
   const calculateMetrics = async () => {

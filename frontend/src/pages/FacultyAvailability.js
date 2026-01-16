@@ -8,14 +8,12 @@ import {
   Alert,
   Grid,
   TextField,
-  MenuItem,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  IconButton,
   Chip,
   Dialog,
   DialogTitle,
@@ -24,15 +22,12 @@ import {
 } from '@mui/material';
 import {
   Add as AddIcon,
-  Delete as DeleteIcon,
-  CalendarToday as CalendarIcon,
 } from '@mui/icons-material';
-import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 
 const FacultyAvailability = () => {
-  const { user } = useAuth();
+  const { } = useAuth();
   const [faculty, setFaculty] = useState(null);
   const [timeslots, setTimeslots] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,6 +43,7 @@ const FacultyAvailability = () => {
   useEffect(() => {
     fetchFacultyData();
     fetchTimeslots();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchFacultyData = async () => {

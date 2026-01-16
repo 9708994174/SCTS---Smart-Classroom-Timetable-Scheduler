@@ -33,7 +33,6 @@ import {
   Add as AddIcon,
   Send as SendIcon,
   Close as CloseIcon,
-  CheckCircle as CheckCircleIcon,
   Schedule as ScheduleIcon,
   Error as ErrorIcon,
   Warning as WarningIcon,
@@ -75,6 +74,7 @@ const SupportTickets = () => {
 
   useEffect(() => {
     fetchTickets();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabValue]);
 
   useEffect(() => {
@@ -88,6 +88,7 @@ const SupportTickets = () => {
     }, 5000);
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTicket?._id]);
 
   const fetchTickets = async () => {
@@ -115,7 +116,7 @@ const SupportTickets = () => {
     try {
       setError('');
       setSuccess('');
-      const response = await axios.post('/api/support', formData);
+      await axios.post('/api/support', formData);
       setSuccess('Support ticket created successfully!');
       setOpenDialog(false);
       setFormData({

@@ -40,7 +40,6 @@ import {
   Download as DownloadIcon,
   Close as CloseIcon,
 } from '@mui/icons-material';
-import { motion } from 'framer-motion';
 import axios from 'axios';
 
 const ManageStudents = () => {
@@ -78,6 +77,7 @@ const ManageStudents = () => {
 
   useEffect(() => {
     fetchStudents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
   const fetchStudents = async () => {

@@ -16,20 +16,17 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider,
   Paper,
 } from '@mui/material';
 import {
   Search as SearchIcon,
   ExpandMore as ExpandMoreIcon,
-  Book as BookIcon,
   Schedule as ScheduleIcon,
   CheckCircle as CheckCircleIcon,
   People as PeopleIcon,
   School as SchoolIcon,
   Help as HelpIcon,
   QuestionAnswer as QuestionAnswerIcon,
-  VideoLibrary as VideoLibraryIcon,
   Article as ArticleIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';

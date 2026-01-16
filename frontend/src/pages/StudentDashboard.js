@@ -13,7 +13,6 @@ import {
   CalendarToday as CalendarTodayIcon,
   Book as BookIcon,
   Schedule as ScheduleIcon,
-  CheckCircle as CheckCircleIcon,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
@@ -33,6 +32,7 @@ const StudentDashboard = () => {
 
   useEffect(() => {
     fetchStudentStats();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const fetchStudentStats = async () => {

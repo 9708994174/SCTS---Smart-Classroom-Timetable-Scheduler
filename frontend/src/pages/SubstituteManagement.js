@@ -18,7 +18,6 @@ import {
   Alert,
   CircularProgress,
   Grid,
-  Paper,
   IconButton,
   Divider,
 } from '@mui/material';
@@ -28,9 +27,7 @@ import {
   Cancel as CancelIcon,
   Schedule as ScheduleIcon,
   Person as PersonIcon,
-  Edit as EditIcon,
   Delete as DeleteIcon,
-  Search as SearchIcon,
 } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
@@ -41,7 +38,7 @@ const SubstituteManagement = () => {
   const [substitutes, setSubstitutes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
-  const [selectedSubstitute, setSelectedSubstitute] = useState(null);
+  const [, setSelectedSubstitute] = useState(null);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [timetables, setTimetables] = useState([]);
@@ -67,6 +64,7 @@ const SubstituteManagement = () => {
       fetchTimetables();
       fetchFaculty();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
   const fetchSubstitutes = async () => {
@@ -109,7 +107,7 @@ const SubstituteManagement = () => {
     try {
       setError('');
       setSuccess('');
-      const response = await axios.post('/api/substitute', formData);
+      await axios.post('/api/substitute', formData);
       setSuccess('Substitute assignment created successfully!');
       setOpenDialog(false);
       setFormData({

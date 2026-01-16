@@ -19,7 +19,6 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  Paper,
 } from '@mui/material';
 import {
   CheckCircle as CheckCircleIcon,
@@ -56,6 +55,7 @@ const StudentAttendance = () => {
     }, 30000);
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, selectedSubject]);
 
   const fetchAttendance = async () => {

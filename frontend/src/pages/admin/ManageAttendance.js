@@ -15,18 +15,12 @@ import {
   TableRow,
   Chip,
   TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
   Button,
-  Paper,
 } from '@mui/material';
 import {
   TrendingUp as TrendingUpIcon,
   CheckCircle as CheckCircleIcon,
   Cancel as CancelIcon,
-  AccessTime as AccessTimeIcon,
   Refresh as RefreshIcon,
 } from '@mui/icons-material';
 import axios from 'axios';
@@ -64,6 +58,7 @@ const ManageAttendance = () => {
     return () => {
       clearTimeout(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
   const fetchAttendance = async () => {

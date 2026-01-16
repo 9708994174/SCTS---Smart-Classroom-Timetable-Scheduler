@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   Typography,
   Box,
-  Card,
-  CardContent,
   CircularProgress,
   Alert,
   Chip,
@@ -17,7 +15,7 @@ import axios from 'axios';
 import TimetableGrid from '../components/Timetable/TimetableGrid';
 
 const FacultyTimetable = () => {
-  const { user } = useAuth();
+  const { } = useAuth();
   const [timetables, setTimetables] = useState([]);
   const [selectedTimetable, setSelectedTimetable] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -26,6 +24,7 @@ const FacultyTimetable = () => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchData = async () => {

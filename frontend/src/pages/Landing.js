@@ -6,7 +6,6 @@ import {
   Typography,
   Button,
   Grid,
-  Card,
   Stack,
   Divider,
   IconButton,
@@ -167,6 +166,63 @@ const Landing = () => {
           </Grid>
         </Grid>
       </Container>
+
+      {/* ---------------- FEATURES ---------------- */}
+      <Box id="features" sx={{ py: 12 }}>
+        <Container maxWidth="lg">
+          <Typography variant="h2" textAlign="center" fontWeight={800} mb={8}>
+            Powerful Features
+          </Typography>
+          <Grid container spacing={4}>
+            {features.map((f, i) => (
+              <Grid item xs={12} sm={6} md={4} key={i}>
+                <motion.div whileHover={{ y: -12 }}>
+                  <Box
+                    sx={{
+                      p: 4,
+                      height: '100%',
+                      borderRadius: 5,
+                      background: 'rgba(255,255,255,0.18)',
+                      backdropFilter: 'blur(16px)',
+                      border: '1px solid rgba(255,255,255,0.25)',
+                      color: 'white',
+                      transition: '0.4s',
+                      '&:hover': {
+                        background: 'rgba(255,255,255,0.28)',
+                        boxShadow: '0 30px 60px rgba(0,0,0,0.35)',
+                      },
+                    }}
+                  >
+                    <Box sx={{ mb: 3 }}>{f.icon}</Box>
+                    <Typography variant="h5" fontWeight={700} mb={2}>
+                      {f.title}
+                    </Typography>
+                    <Typography opacity={0.9}>{f.description}</Typography>
+                  </Box>
+                </motion.div>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* ---------------- STATS ---------------- */}
+      <Box sx={{ py: 6, background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(10px)' }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={4}>
+            {stats.map((s, i) => (
+              <Grid item xs={6} md={3} key={i}>
+                <Typography variant="h3" fontWeight={800} textAlign="center" textShadow="0 0 25px rgba(255,255,255,0.35)">
+                  {s.number}
+                </Typography>
+                <Typography textAlign="center" opacity={0.9}>
+                  {s.label}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
 
       {/* ---------------- BENEFITS ---------------- */}
       <Box id="benefits" sx={{ py: 12, background: 'rgba(255,255,255,0.12)' }}>

@@ -16,7 +16,7 @@ export const NotificationProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [pollingInterval, setPollingInterval] = useState(null);
+  const [, setPollingInterval] = useState(null);
   const { user } = useAuth();
 
   // Fetch notifications

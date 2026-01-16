@@ -40,7 +40,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 
 const FacultyAttendance = () => {
-  const { user } = useAuth();
+  const { } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -63,6 +63,7 @@ const FacultyAttendance = () => {
       fetchStudents();
       checkExistingAttendance();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedEntry, selectedDate, showAttendancePage]);
 
   const fetchFacultyData = async () => {

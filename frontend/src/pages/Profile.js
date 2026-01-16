@@ -8,7 +8,6 @@ import {
   TextField,
   Button,
   Avatar,
-  Divider,
   Chip,
   Alert,
   CircularProgress,
@@ -19,7 +18,6 @@ import {
   IconButton,
   InputAdornment,
   MenuItem,
-  Paper,
   List,
   ListItem,
   ListItemText,
@@ -68,6 +66,7 @@ const Profile = () => {
 
   useEffect(() => {
     fetchProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const fetchProfile = async () => {

@@ -28,7 +28,6 @@ import {
   MeetingRoom as MeetingRoomIcon,
   Book as BookIcon,
   Schedule as ScheduleIcon,
-  Settings as SettingsIcon,
   Logout as LogoutIcon,
   AccountCircle as AccountCircleIcon,
   CalendarToday as CalendarTodayIcon,
