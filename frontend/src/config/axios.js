@@ -37,10 +37,27 @@ const getApiUrl = () => {
 const apiUrl = getApiUrl();
 
 // Log the final API URL being used (for debugging)
+const isProduction = process.env.NODE_ENV === 'production' || 
+                     (typeof window !== 'undefined' && 
+                      window.location.hostname !== 'localhost' && 
+                      window.location.hostname !== '127.0.0.1');
+
 if (apiUrl) {
   console.log('🌐 API Base URL:', apiUrl);
 } else {
-  console.log('🌐 Using relative URLs (same origin)');
+  if (isProduction) {
+    console.error('❌ CRITICAL: REACT_APP_BACKEND_URL is not set in production!');
+    console.error('❌ All API calls will fail. Please set REACT_APP_BACKEND_URL in Vercel environment variables.');
+    console.error('❌ Current hostname:', typeof window !== 'undefined' ? window.location.hostname : 'unknown');
+    // Show alert to user in production
+    if (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app')) {
+      setTimeout(() => {
+        alert('⚠️ Configuration Error: Backend URL not configured. Please contact administrator.');
+      }, 2000);
+    }
+  } else {
+    console.log('🌐 Using relative URLs (same origin)');
+  }
 }
 
 // Create axios instance with base URL
@@ -73,6 +90,17 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
+    // Handle 405 Method Not Allowed - usually means wrong URL
+    if (error.response?.status === 405) {
+      console.error('❌ 405 Method Not Allowed - API endpoint not found');
+      console.error('❌ Request URL:', error.config?.url);
+      console.error('❌ Base URL:', error.config?.baseURL || 'none (relative)');
+      console.error('❌ Full URL:', error.config?.baseURL ? error.config.baseURL + error.config.url : window.location.origin + error.config.url);
+      if (!apiUrl || apiUrl === '') {
+        console.error('❌ REACT_APP_BACKEND_URL is not set! Set it in Vercel environment variables.');
+      }
+    }
+    
     // Handle 401 Unauthorized - redirect to login
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
@@ -86,6 +114,8 @@ axiosInstance.interceptors.response.use(
     // Handle network errors
     if (!error.response) {
       console.error('Network Error:', error.message);
+      console.error('Request URL:', error.config?.url);
+      console.error('Base URL:', error.config?.baseURL || 'none (relative)');
     }
     
     return Promise.reject(error);
