@@ -55,7 +55,7 @@ const Timetables = () => {
 
   const handleApprove = async (id) => {
     try {
-      await axios.put(`/api/timetable/${id}/approve`);
+      await axiosInstance.put(`/api/timetable/${id}/approve`);
       setSuccess('Timetable approved successfully!');
       fetchTimetables();
       setTimeout(() => setSuccess(''), 3000);
@@ -69,7 +69,7 @@ const Timetables = () => {
 
   const handlePublish = async (id) => {
     try {
-      await axios.put(`/api/timetable/${id}/publish`);
+      await axiosInstance.put(`/api/timetable/${id}/publish`);
       setSuccess('Timetable published successfully! Faculty can now see it.');
       fetchTimetables();
       setTimeout(() => setSuccess(''), 3000);

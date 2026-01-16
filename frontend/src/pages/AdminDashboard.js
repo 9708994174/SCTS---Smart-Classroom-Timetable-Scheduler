@@ -114,7 +114,7 @@ const AdminDashboard = () => {
     // Fetch real utilization data from timetables
     const fetchUtilizationData = async () => {
       try {
-        const response = await axios.get('/api/timetable?status=published');
+        const response = await axiosInstance.get('/api/timetable?status=published');
         const timetables = response.data.data;
         
         if (timetables.length > 0) {
