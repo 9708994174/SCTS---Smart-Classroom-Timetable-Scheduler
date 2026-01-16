@@ -2,6 +2,9 @@
 
 An intelligent, constraint-based, web-driven scheduling system that generates optimized timetables for UG and PG programs using hybrid Genetic Algorithm (GA) and Constraint Satisfaction Programming (CSP) optimization techniques.
 
+# Platform Link 
+https://sctscheduler.vercel.app/login
+
 ## Features
 
 - **Automated Timetable Generation**: Conflict-free schedules using GA-CSP hybrid optimization
