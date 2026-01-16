@@ -10,8 +10,17 @@ const getApiUrl = () => {
   
   // Priority 2: REACT_APP_BACKEND_URL (backend URL)
   if (process.env.REACT_APP_BACKEND_URL) {
-    console.log('Using REACT_APP_BACKEND_URL:', process.env.REACT_APP_BACKEND_URL);
-    return process.env.REACT_APP_BACKEND_URL;
+    let backendUrl = process.env.REACT_APP_BACKEND_URL.trim();
+    // Fix common mistake: if value includes "VITE_API_BASE_URL=" or similar, extract just the URL
+    if (backendUrl.includes('=')) {
+      const parts = backendUrl.split('=');
+      backendUrl = parts[parts.length - 1].trim();
+      console.warn('⚠️ Environment variable appears to include variable name. Using extracted URL:', backendUrl);
+    }
+    // Remove trailing slash if present
+    backendUrl = backendUrl.replace(/\/$/, '');
+    console.log('Using REACT_APP_BACKEND_URL:', backendUrl);
+    return backendUrl;
   }
   
   // Check if we're in production
