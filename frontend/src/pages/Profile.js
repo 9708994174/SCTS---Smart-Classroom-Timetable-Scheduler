@@ -42,7 +42,7 @@ import {
   Settings as SettingsIcon,
 } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 import { format } from 'date-fns';
 
 const Profile = () => {
@@ -73,13 +73,13 @@ const Profile = () => {
   const fetchProfile = async () => {
     try {
       setLoading(true);
-      const userRes = await axios.get('/api/auth/me');
+      const userRes = await axiosInstance.get('/api/auth/me');
       let profile = { ...userRes.data.data };
 
       // Fetch role-specific data
       if (user?.role === 'faculty') {
         try {
-          const facultyRes = await axios.get('/api/faculty/me');
+          const facultyRes = await axiosInstance.get('/api/faculty/me');
           profile = { ...profile, ...facultyRes.data.data };
         } catch (err) {
           console.error('Error fetching faculty data:', err);
@@ -128,12 +128,12 @@ const Profile = () => {
         uid: formData.uid,
       };
 
-      await axios.put('/api/auth/me', updateData);
+      await axiosInstance.put('/api/auth/me', updateData);
 
       // If faculty, update faculty profile
       if (user?.role === 'faculty' && formData.phone) {
         try {
-          await axios.put('/api/faculty/me', {
+          await axiosInstance.put('/api/faculty/me', {
             phone: formData.phone,
             name: formData.name,
             email: formData.email,
@@ -171,7 +171,7 @@ const Profile = () => {
       setError('');
       setSuccess('');
 
-      await axios.put('/api/auth/change-password', {
+      await axiosInstance.put('/api/auth/change-password', {
         currentPassword: passwordData.currentPassword,
         newPassword: passwordData.newPassword,
       });
@@ -634,4 +634,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
 

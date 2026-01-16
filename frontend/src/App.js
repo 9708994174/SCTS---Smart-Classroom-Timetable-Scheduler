@@ -9,6 +9,7 @@ import DashboardLayout from './components/Layout/DashboardLayout';
 import theme from './theme/theme';
 
 // Pages
+import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
@@ -57,7 +58,7 @@ function App() {
             <Route
               path="/"
               element={
-                <PrivateRoute>
+                <PrivateRoute fallback={<Landing />}>
                   <DashboardLayout>
                     <Dashboard />
                   </DashboardLayout>

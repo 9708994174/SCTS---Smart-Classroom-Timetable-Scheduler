@@ -17,7 +17,7 @@ import {
   ArrowBack as ArrowBackIcon,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -34,7 +34,7 @@ const ForgotPassword = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('/api/auth/forgot-password', { email });
+      const response = await axiosInstance.post('/api/auth/forgot-password', { email });
       setSuccess(response.data.message);
       
       // In development, show the reset token
@@ -239,4 +239,5 @@ const ForgotPassword = () => {
 };
 
 export default ForgotPassword;
+
 

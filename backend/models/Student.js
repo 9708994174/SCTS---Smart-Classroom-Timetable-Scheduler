@@ -64,3 +64,4 @@ studentSchema.index({ email: 1 });
 
 module.exports = mongoose.model('Student', studentSchema);
 
+

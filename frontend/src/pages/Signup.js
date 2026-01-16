@@ -23,7 +23,7 @@ import {
   Badge as BadgeIcon,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -69,7 +69,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('/api/auth/register', {
+      const response = await axiosInstance.post('/api/auth/register', {
         name: formData.name,
         email: formData.email,
         password: formData.password,

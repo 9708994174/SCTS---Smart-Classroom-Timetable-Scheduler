@@ -20,7 +20,7 @@ import {
   ArrowBack as ArrowBackIcon,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -77,7 +77,7 @@ const ResetPassword = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`/api/auth/reset-password/${token}`, {
+      const response = await axiosInstance.post(`/api/auth/reset-password/${token}`, {
         password
       });
       setSuccess(response.data.message);
@@ -364,4 +364,5 @@ const ResetPassword = () => {
 };
 
 export default ResetPassword;
+
 
