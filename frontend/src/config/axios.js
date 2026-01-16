@@ -2,31 +2,50 @@ import axios from 'axios';
 
 // Get API URL from environment variable or detect automatically
 const getApiUrl = () => {
-  // If REACT_APP_API_URL is explicitly set, use it
+  // Priority 1: REACT_APP_API_URL (explicit API URL)
   if (process.env.REACT_APP_API_URL) {
+    console.log('Using REACT_APP_API_URL:', process.env.REACT_APP_API_URL);
     return process.env.REACT_APP_API_URL;
   }
   
-  // In production (Vercel/deployed), use environment variable
-  if (process.env.NODE_ENV === 'production') {
-    // For Vercel, you MUST set REACT_APP_BACKEND_URL in environment variables
-    // Example: REACT_APP_BACKEND_URL=https://your-backend.herokuapp.com
-    // If not set, it will try to use relative URL (only works if backend is on same domain)
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
-    if (backendUrl) {
-      return backendUrl;
-    }
-    // Fallback to relative URL (only works if backend is on same domain/subdomain)
+  // Priority 2: REACT_APP_BACKEND_URL (backend URL)
+  if (process.env.REACT_APP_BACKEND_URL) {
+    console.log('Using REACT_APP_BACKEND_URL:', process.env.REACT_APP_BACKEND_URL);
+    return process.env.REACT_APP_BACKEND_URL;
+  }
+  
+  // Check if we're in production
+  const isProduction = process.env.NODE_ENV === 'production' || 
+                       (window.location.hostname !== 'localhost' && 
+                        window.location.hostname !== '127.0.0.1');
+  
+  if (isProduction) {
+    // In production without env var, don't use localhost
+    // Use empty string for relative URLs or detect from window.location
+    console.warn('⚠️ REACT_APP_BACKEND_URL not set in production! Using relative URL.');
+    console.warn('⚠️ Please set REACT_APP_BACKEND_URL environment variable in Vercel.');
+    // Return empty string for relative URLs (only works if backend is proxied/same domain)
     return '';
   }
   
   // Development fallback
+  console.log('Development mode: Using localhost:5000');
   return 'http://localhost:5000';
 };
 
+// Get the API URL
+const apiUrl = getApiUrl();
+
+// Log the final API URL being used (for debugging)
+if (apiUrl) {
+  console.log('🌐 API Base URL:', apiUrl);
+} else {
+  console.log('🌐 Using relative URLs (same origin)');
+}
+
 // Create axios instance with base URL
 const axiosInstance = axios.create({
-  baseURL: getApiUrl(),
+  baseURL: apiUrl,
   timeout: 30000, // 30 seconds timeout
   headers: {
     'Content-Type': 'application/json',
