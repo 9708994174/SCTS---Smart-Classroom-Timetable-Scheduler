@@ -29,7 +29,7 @@ import {
   Delete as DeleteIcon,
   Book as BookIcon,
 } from '@mui/icons-material';
-import axios from 'axios';
+import axiosInstance from '../../config/axios';
 
 const ManageSubjects = () => {
   const [subjects, setSubjects] = useState([]);
@@ -65,8 +65,8 @@ const ManageSubjects = () => {
   const fetchData = async () => {
     try {
       const [subjectsRes, facultyRes] = await Promise.all([
-        axios.get('/api/subject'),
-        axios.get('/api/faculty'),
+        axiosInstance.get('/api/subject'),
+        axiosInstance.get('/api/faculty'),
       ]);
       setSubjects(subjectsRes.data.data);
       setFaculty(facultyRes.data.data);
@@ -156,10 +156,10 @@ const ManageSubjects = () => {
 
     try {
       if (editing) {
-        await axios.put(`/api/subject/${editing._id}`, formData);
+        await axiosInstance.put(`/api/subject/${editing._id}`, formData);
         setSuccess('Subject updated successfully!');
       } else {
-        await axios.post('/api/subject', formData);
+        await axiosInstance.post('/api/subject', formData);
         setSuccess('Subject created successfully!');
       }
       
@@ -176,7 +176,7 @@ const ManageSubjects = () => {
     if (!window.confirm('Are you sure you want to delete this subject?')) return;
     
     try {
-      await axios.delete(`/api/subject/${id}`);
+      await axiosInstance.delete(`/api/subject/${id}`);
       setSuccess('Subject deleted successfully!');
       fetchData();
     } catch (error) {

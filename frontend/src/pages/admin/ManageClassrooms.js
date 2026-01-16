@@ -29,7 +29,7 @@ import {
   Delete as DeleteIcon,
   MeetingRoom as RoomIcon,
 } from '@mui/icons-material';
-import axios from 'axios';
+import axiosInstance from '../../config/axios';
 
 const ManageClassrooms = () => {
   const [classrooms, setClassrooms] = useState([]);
@@ -63,7 +63,7 @@ const ManageClassrooms = () => {
 
   const fetchClassrooms = async () => {
     try {
-      const response = await axios.get('/api/classroom');
+      const response = await axiosInstance.get('/api/classroom');
       setClassrooms(response.data.data);
     } catch (error) {
       setError('Failed to load classrooms');
@@ -151,10 +151,10 @@ const ManageClassrooms = () => {
 
     try {
       if (editing) {
-        await axios.put(`/api/classroom/${editing._id}`, formData);
+        await axiosInstance.put(`/api/classroom/${editing._id}`, formData);
         setSuccess('Classroom updated successfully!');
       } else {
-        await axios.post('/api/classroom', formData);
+        await axiosInstance.post('/api/classroom', formData);
         setSuccess('Classroom created successfully!');
       }
       
@@ -171,7 +171,7 @@ const ManageClassrooms = () => {
     if (!window.confirm('Are you sure you want to delete this classroom?')) return;
     
     try {
-      await axios.delete(`/api/classroom/${id}`);
+      await axiosInstance.delete(`/api/classroom/${id}`);
       setSuccess('Classroom deleted successfully!');
       fetchClassrooms();
     } catch (error) {

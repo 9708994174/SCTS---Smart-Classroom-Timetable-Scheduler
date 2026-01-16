@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 import { useNavigate } from 'react-router-dom';
 import {
   Typography,
@@ -37,7 +37,7 @@ const FacultyDashboard = () => {
   const fetchUpcomingClasses = async () => {
     try {
       // Get faculty profile by current user
-      const facultyRes = await axios.get('/api/faculty/me');
+      const facultyRes = await axiosInstance.get('/api/faculty/me');
       const myFaculty = facultyRes.data.data;
       
       if (!myFaculty || !myFaculty._id) {
@@ -47,8 +47,8 @@ const FacultyDashboard = () => {
       
       // Get both published and approved timetables
       const [publishedRes, approvedRes] = await Promise.all([
-        axios.get('/api/timetable?status=published').catch(() => ({ data: { data: [] } })),
-        axios.get('/api/timetable?status=approved').catch(() => ({ data: { data: [] } }))
+        axiosInstance.get('/api/timetable?status=published').catch(() => ({ data: { data: [] } })),
+        axiosInstance.get('/api/timetable?status=approved').catch(() => ({ data: { data: [] } }))
       ]);
       
       const allTimetables = [

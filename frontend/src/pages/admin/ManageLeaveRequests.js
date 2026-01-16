@@ -27,7 +27,7 @@ import {
   Refresh as RefreshIcon,
   CalendarToday as CalendarTodayIcon,
 } from '@mui/icons-material';
-import axios from 'axios';
+import axiosInstance from '../../config/axios';
 import { format } from 'date-fns';
 
 const ManageLeaveRequests = () => {
@@ -45,7 +45,7 @@ const ManageLeaveRequests = () => {
   const fetchLeaveRequests = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/faculty/leaves/pending');
+      const response = await axiosInstance.get('/api/faculty/leaves/pending');
       setLeaveRequests(response.data.data || []);
       setError('');
     } catch (error) {
@@ -60,7 +60,7 @@ const ManageLeaveRequests = () => {
     if (!approveDialog.leave) return;
 
     try {
-      await axios.put(
+      await axiosInstance.put(
         `/api/faculty/${approveDialog.leave.facultyId}/leaves/${approveDialog.leave.leaveId}/approve`
       );
       setSuccess('Leave request approved successfully!');
@@ -77,7 +77,7 @@ const ManageLeaveRequests = () => {
     if (!rejectDialog.leave) return;
 
     try {
-      await axios.put(
+      await axiosInstance.put(
         `/api/faculty/${rejectDialog.leave.facultyId}/leaves/${rejectDialog.leave.leaveId}/reject`
       );
       setSuccess('Leave request rejected successfully!');

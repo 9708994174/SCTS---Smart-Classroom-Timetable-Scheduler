@@ -33,7 +33,7 @@ import {
   Schedule as ScheduleIcon,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 
 const steps = ['Configure Parameters', 'Review & Generate', 'Results'];
 
@@ -86,7 +86,7 @@ const GenerateTimetable = () => {
 
     try {
       // Check subjects
-      const subjectsRes = await axios.get('/api/subject', {
+      const subjectsRes = await axiosInstance.get('/api/subject', {
         params: {
           department: formData.department,
           semester: formData.semester
@@ -115,7 +115,7 @@ const GenerateTimetable = () => {
       }
 
       // Check faculty
-      const facultyRes = await axios.get('/api/faculty', {
+      const facultyRes = await axiosInstance.get('/api/faculty', {
         params: { department: formData.department }
       });
       if (!facultyRes.data.data || facultyRes.data.data.length === 0) {
@@ -128,7 +128,7 @@ const GenerateTimetable = () => {
       }
 
       // Check classrooms
-      const classroomRes = await axios.get('/api/classroom');
+      const classroomRes = await axiosInstance.get('/api/classroom');
       if (!classroomRes.data.data || classroomRes.data.data.length === 0) {
         errors.push({
           type: 'classrooms',
@@ -139,7 +139,7 @@ const GenerateTimetable = () => {
       }
 
       // Check timeslots
-      const timeslotRes = await axios.get('/api/timeslot');
+      const timeslotRes = await axiosInstance.get('/api/timeslot');
       if (!timeslotRes.data.data || timeslotRes.data.data.length === 0) {
         errors.push({
           type: 'timeslots',
@@ -206,7 +206,7 @@ const GenerateTimetable = () => {
     setSuccess('');
 
     try {
-      const response = await axios.post('/api/admin/generate-timetable', {
+      const response = await axiosInstance.post('/api/admin/generate-timetable', {
         academicYear: formData.academicYear,
         semester: parseInt(formData.semester),
         department: formData.department,

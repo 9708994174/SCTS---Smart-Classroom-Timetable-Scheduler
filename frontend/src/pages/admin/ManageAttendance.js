@@ -23,7 +23,7 @@ import {
   Cancel as CancelIcon,
   Refresh as RefreshIcon,
 } from '@mui/icons-material';
-import axios from 'axios';
+import axiosInstance from '../../config/axios';
 import { format } from 'date-fns';
 import StatCard from '../../components/Cards/StatCard';
 
@@ -70,7 +70,7 @@ const ManageAttendance = () => {
       if (filters.academicYear) params.academicYear = filters.academicYear;
       if (filters.date) params.date = filters.date;
 
-      const response = await axios.get('/api/attendance', { params });
+      const response = await axiosInstance.get('/api/attendance', { params });
       setAttendance(response.data.data || []);
     } catch (error) {
       console.error('Error fetching attendance:', error);
@@ -87,7 +87,7 @@ const ManageAttendance = () => {
       if (filters.semester) params.semester = filters.semester;
       if (filters.academicYear) params.academicYear = filters.academicYear;
 
-      const response = await axios.get('/api/attendance/stats', { params });
+      const response = await axiosInstance.get('/api/attendance/stats', { params });
       setStats(response.data.data || stats);
     } catch (error) {
       console.error('Error fetching stats:', error);

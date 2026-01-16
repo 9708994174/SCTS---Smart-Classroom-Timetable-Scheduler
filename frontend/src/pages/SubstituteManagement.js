@@ -30,7 +30,7 @@ import {
   Delete as DeleteIcon,
 } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 import { format } from 'date-fns';
 
 const SubstituteManagement = () => {
@@ -74,7 +74,7 @@ const SubstituteManagement = () => {
       if (filters.date) params.date = filters.date;
       if (filters.facultyId) params.facultyId = filters.facultyId;
 
-      const response = await axios.get('/api/substitute', { params });
+      const response = await axiosInstance.get('/api/substitute', { params });
       setSubstitutes(response.data.data || []);
     } catch (error) {
       console.error('Error fetching substitutes:', error);
@@ -86,7 +86,7 @@ const SubstituteManagement = () => {
 
   const fetchTimetables = async () => {
     try {
-      const response = await axios.get('/api/timetable?status=published');
+      const response = await axiosInstance.get('/api/timetable?status=published');
       setTimetables(response.data.data || []);
     } catch (error) {
       console.error('Error fetching timetables:', error);
@@ -95,7 +95,7 @@ const SubstituteManagement = () => {
 
   const fetchFaculty = async () => {
     try {
-      const response = await axios.get('/api/faculty');
+      const response = await axiosInstance.get('/api/faculty');
       setFaculty(response.data.data || []);
     } catch (error) {
       console.error('Error fetching faculty:', error);
@@ -106,7 +106,7 @@ const SubstituteManagement = () => {
     try {
       setError('');
       setSuccess('');
-      await axios.post('/api/substitute', formData);
+      await axiosInstance.post('/api/substitute', formData);
       setSuccess('Substitute assignment created successfully!');
       setOpenDialog(false);
       setFormData({
@@ -126,7 +126,7 @@ const SubstituteManagement = () => {
 
   const handleUpdateStatus = async (substituteId, newStatus) => {
     try {
-      await axios.put(`/api/substitute/${substituteId}`, { status: newStatus });
+      await axiosInstance.put(`/api/substitute/${substituteId}`, { status: newStatus });
       setSuccess('Substitute assignment updated successfully!');
       fetchSubstitutes();
       setTimeout(() => setSuccess(''), 3000);
@@ -139,7 +139,7 @@ const SubstituteManagement = () => {
     if (!window.confirm('Are you sure you want to delete this substitute assignment?')) return;
 
     try {
-      await axios.delete(`/api/substitute/${substituteId}`);
+      await axiosInstance.delete(`/api/substitute/${substituteId}`);
       setSuccess('Substitute assignment deleted successfully!');
       fetchSubstitutes();
       setTimeout(() => setSuccess(''), 3000);

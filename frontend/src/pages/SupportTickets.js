@@ -39,7 +39,7 @@ import {
   Info as InfoIcon,
 } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 import { format } from 'date-fns';
 
 const SupportTickets = () => {
@@ -65,7 +65,7 @@ const SupportTickets = () => {
   const fetchSelectedTicket = async () => {
     if (!selectedTicket?._id) return;
     try {
-      const response = await axios.get(`/api/support/${selectedTicket._id}`);
+      const response = await axiosInstance.get(`/api/support/${selectedTicket._id}`);
       setSelectedTicket(response.data.data);
     } catch (error) {
       console.error('Error fetching selected ticket:', error);
@@ -101,7 +101,7 @@ const SupportTickets = () => {
       else if (tabValue === 4) status = 'closed';
 
       const params = status ? { status } : {};
-      const response = await axios.get('/api/support', { params });
+      const response = await axiosInstance.get('/api/support', { params });
       setTickets(response.data.data || []);
       setLastUpdate(new Date());
     } catch (error) {
@@ -116,7 +116,7 @@ const SupportTickets = () => {
     try {
       setError('');
       setSuccess('');
-      await axios.post('/api/support', formData);
+      await axiosInstance.post('/api/support', formData);
       setSuccess('Support ticket created successfully!');
       setOpenDialog(false);
       setFormData({
@@ -137,13 +137,13 @@ const SupportTickets = () => {
 
     try {
       setError('');
-      await axios.post(`/api/support/${selectedTicket._id}/message`, {
+      await axiosInstance.post(`/api/support/${selectedTicket._id}/message`, {
         message: messageText,
       });
       setMessageText('');
       fetchTickets();
       // Refresh selected ticket
-      const response = await axios.get(`/api/support/${selectedTicket._id}`);
+      const response = await axiosInstance.get(`/api/support/${selectedTicket._id}`);
       setSelectedTicket(response.data.data);
     } catch (error) {
       setError(error.response?.data?.message || 'Failed to send message');
@@ -156,11 +156,11 @@ const SupportTickets = () => {
       if (resolution) {
         updateData.resolution = resolution;
       }
-      await axios.put(`/api/support/${ticketId}`, updateData);
+      await axiosInstance.put(`/api/support/${ticketId}`, updateData);
       setSuccess('Ticket status updated successfully!');
       fetchTickets();
       if (selectedTicket && selectedTicket._id === ticketId) {
-        const response = await axios.get(`/api/support/${ticketId}`);
+        const response = await axiosInstance.get(`/api/support/${ticketId}`);
         setSelectedTicket(response.data.data);
       }
       if (newStatus === 'resolved') {

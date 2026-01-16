@@ -19,7 +19,7 @@ import {
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 import StatCard from '../components/Cards/StatCard';
 import UtilizationChart from '../components/Charts/UtilizationChart';
 
@@ -52,7 +52,7 @@ const AdminDashboard = () => {
       let dataCompleteness = 0;
 
       // Get published timetables for utilization calculation
-      const timetablesRes = await axios.get('/api/timetable?status=published');
+      const timetablesRes = await axiosInstance.get('/api/timetable?status=published');
       const timetables = timetablesRes.data.data || [];
       
       if (timetables.length > 0 && stats.classrooms > 0) {
@@ -99,7 +99,7 @@ const AdminDashboard = () => {
 
   const fetchStats = async () => {
     try {
-      const response = await axios.get('/api/admin/stats');
+      const response = await axiosInstance.get('/api/admin/stats');
       setStats(response.data.data);
     } catch (error) {
       console.error('Error fetching stats:', error);

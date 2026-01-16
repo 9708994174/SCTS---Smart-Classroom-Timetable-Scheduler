@@ -28,7 +28,7 @@ import {
   Delete as DeleteIcon,
   Schedule as ScheduleIcon,
 } from '@mui/icons-material';
-import axios from 'axios';
+import axiosInstance from '../../config/axios';
 
 const ManageTimeslots = () => {
   const [timeslots, setTimeslots] = useState([]);
@@ -51,7 +51,7 @@ const ManageTimeslots = () => {
 
   const fetchTimeslots = async () => {
     try {
-      const response = await axios.get('/api/timeslot');
+      const response = await axiosInstance.get('/api/timeslot');
       setTimeslots(response.data.data);
     } catch (error) {
       setError('Failed to load timeslots');
@@ -101,10 +101,10 @@ const ManageTimeslots = () => {
 
     try {
       if (editing) {
-        await axios.put(`/api/timeslot/${editing._id}`, formData);
+        await axiosInstance.put(`/api/timeslot/${editing._id}`, formData);
         setSuccess('Timeslot updated successfully!');
       } else {
-        await axios.post('/api/timeslot', formData);
+        await axiosInstance.post('/api/timeslot', formData);
         setSuccess('Timeslot created successfully!');
       }
       
@@ -121,7 +121,7 @@ const ManageTimeslots = () => {
     if (!window.confirm('Are you sure you want to delete this timeslot?')) return;
     
     try {
-      await axios.delete(`/api/timeslot/${id}`);
+      await axiosInstance.delete(`/api/timeslot/${id}`);
       setSuccess('Timeslot deleted successfully!');
       fetchTimeslots();
     } catch (error) {
@@ -155,7 +155,7 @@ const ManageTimeslots = () => {
     });
 
     try {
-      await axios.post('/api/timeslot/bulk', bulkData);
+      await axiosInstance.post('/api/timeslot/bulk', bulkData);
       setSuccess('Bulk timeslots created successfully!');
       fetchTimeslots();
     } catch (error) {

@@ -10,7 +10,7 @@ import {
   FormControl,
   InputLabel,
 } from '@mui/material';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 import TimetableGrid from '../components/Timetable/TimetableGrid';
 
 const FacultyTimetable = () => {
@@ -28,7 +28,7 @@ const FacultyTimetable = () => {
   const fetchData = async () => {
     try {
       // Get faculty profile by current user
-      const facultyRes = await axios.get('/api/faculty/me');
+      const facultyRes = await axiosInstance.get('/api/faculty/me');
       const myFaculty = facultyRes.data.data;
       setFaculty(myFaculty);
       
@@ -40,8 +40,8 @@ const FacultyTimetable = () => {
       
       // Get both published and approved timetables
       const [publishedRes, approvedRes] = await Promise.all([
-        axios.get('/api/timetable?status=published'),
-        axios.get('/api/timetable?status=approved')
+        axiosInstance.get('/api/timetable?status=published'),
+        axiosInstance.get('/api/timetable?status=approved')
       ]);
       
       const allTimetables = [

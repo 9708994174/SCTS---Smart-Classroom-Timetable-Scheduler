@@ -40,7 +40,7 @@ import {
   Download as DownloadIcon,
   Close as CloseIcon,
 } from '@mui/icons-material';
-import axios from 'axios';
+import axiosInstance from '../../config/axios';
 
 const ManageStudents = () => {
   const [students, setStudents] = useState([]);
@@ -89,7 +89,7 @@ const ManageStudents = () => {
       if (filters.program) params.program = filters.program;
       if (filters.isActive) params.isActive = filters.isActive;
 
-      const response = await axios.get('/api/student', { params });
+      const response = await axiosInstance.get('/api/student', { params });
       setStudents(response.data.data || []);
     } catch (error) {
       setError('Failed to load students');
@@ -149,10 +149,10 @@ const ManageStudents = () => {
 
     try {
       if (editing) {
-        await axios.put(`/api/student/${editing._id}`, formData);
+        await axiosInstance.put(`/api/student/${editing._id}`, formData);
         setSuccess('Student updated successfully!');
       } else {
-        await axios.post('/api/student', formData);
+        await axiosInstance.post('/api/student', formData);
         setSuccess('Student created successfully! Default password: student123');
       }
       
@@ -169,7 +169,7 @@ const ManageStudents = () => {
     if (!window.confirm('Are you sure you want to deactivate this student?')) return;
     
     try {
-      await axios.delete(`/api/student/${id}`);
+      await axiosInstance.delete(`/api/student/${id}`);
       setSuccess('Student deactivated successfully!');
       fetchStudents();
     } catch (error) {
@@ -242,7 +242,7 @@ const ManageStudents = () => {
         return;
       }
 
-      const response = await axios.post('/api/student/bulk', { students: studentsToImport });
+      const response = await axiosInstance.post('/api/student/bulk', { students: studentsToImport });
       setBulkImportResults(response.data.results);
       setSuccess(response.data.message);
       fetchStudents();

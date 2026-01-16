@@ -26,7 +26,7 @@ import {
   Delete as DeleteIcon,
   Person as PersonIcon,
 } from '@mui/icons-material';
-import axios from 'axios';
+import axiosInstance from '../../config/axios';
 
 const ManageFaculty = () => {
   const [faculty, setFaculty] = useState([]);
@@ -50,7 +50,7 @@ const ManageFaculty = () => {
 
   const fetchFaculty = async () => {
     try {
-      const response = await axios.get('/api/faculty');
+      const response = await axiosInstance.get('/api/faculty');
       setFaculty(response.data.data);
     } catch (error) {
       setError('Failed to load faculty');
@@ -104,11 +104,11 @@ const ManageFaculty = () => {
 
     try {
       if (editing) {
-        await axios.put(`/api/faculty/${editing._id}`, formData);
+        await axiosInstance.put(`/api/faculty/${editing._id}`, formData);
         setSuccess('Faculty updated successfully!');
       } else {
         // First create user account
-        const userResponse = await axios.post('/api/auth/register', {
+        const userResponse = await axiosInstance.post('/api/auth/register', {
           name: formData.name,
           email: formData.email,
           password: 'faculty123', // Default password
@@ -117,7 +117,7 @@ const ManageFaculty = () => {
         });
 
         // Then create faculty profile
-        await axios.post('/api/faculty', {
+        await axiosInstance.post('/api/faculty', {
           ...formData,
           user: userResponse.data.data.user.id,
         });
@@ -137,7 +137,7 @@ const ManageFaculty = () => {
     if (!window.confirm('Are you sure you want to delete this faculty member?')) return;
     
     try {
-      await axios.delete(`/api/faculty/${id}`);
+      await axiosInstance.delete(`/api/faculty/${id}`);
       setSuccess('Faculty deleted successfully!');
       fetchFaculty();
     } catch (error) {

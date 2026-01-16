@@ -26,7 +26,7 @@ import {
 } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 
 const Timetables = () => {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const Timetables = () => {
 
   const fetchTimetables = async () => {
     try {
-      const response = await axios.get('/api/timetable');
+      const response = await axiosInstance.get('/api/timetable');
       setTimetables(response.data.data);
     } catch (error) {
       console.error('Error fetching timetables:', error);

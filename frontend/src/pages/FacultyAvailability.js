@@ -23,7 +23,7 @@ import {
 import {
   Add as AddIcon,
 } from '@mui/icons-material';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 
 const FacultyAvailability = () => {
   const [faculty, setFaculty] = useState(null);
@@ -47,7 +47,7 @@ const FacultyAvailability = () => {
   const fetchFacultyData = async () => {
     try {
       // Get faculty profile by current user (will auto-create if missing)
-      const response = await axios.get('/api/faculty/me');
+      const response = await axiosInstance.get('/api/faculty/me');
       setFaculty(response.data.data);
       setSuccess('Faculty profile loaded successfully!');
     } catch (error) {
@@ -69,7 +69,7 @@ const FacultyAvailability = () => {
 
   const fetchTimeslots = async () => {
     try {
-      const response = await axios.get('/api/timeslot');
+      const response = await axiosInstance.get('/api/timeslot');
       setTimeslots(response.data.data);
     } catch (error) {
       console.error('Error fetching timeslots:', error);
@@ -97,7 +97,7 @@ const FacultyAvailability = () => {
       }
 
       // Use /me endpoint for easier access
-      await axios.put('/api/faculty/me/availability', {
+      await axiosInstance.put('/api/faculty/me/availability', {
         availability: updatedAvailability,
       });
 
@@ -113,7 +113,7 @@ const FacultyAvailability = () => {
     if (!faculty) return;
 
     try {
-      await axios.post(`/api/faculty/${faculty._id}/leaves`, {
+      await axiosInstance.post(`/api/faculty/${faculty._id}/leaves`, {
         ...leaveData,
         status: 'pending',
       });

@@ -35,7 +35,7 @@ import {
   ArrowBack as ArrowBackIcon,
   People as PeopleIcon,
 } from '@mui/icons-material';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 import { format } from 'date-fns';
 
 const FacultyAttendance = () => {
@@ -66,13 +66,13 @@ const FacultyAttendance = () => {
 
   const fetchFacultyData = async () => {
     try {
-      const facultyRes = await axios.get('/api/faculty/me');
+      const facultyRes = await axiosInstance.get('/api/faculty/me');
       setFaculty(facultyRes.data.data);
 
       // Get published timetables with faculty assignments
       const [publishedRes, approvedRes] = await Promise.all([
-        axios.get('/api/timetable?status=published'),
-        axios.get('/api/timetable?status=approved')
+        axiosInstance.get('/api/timetable?status=published'),
+        axiosInstance.get('/api/timetable?status=approved')
       ]);
 
       const allTimetables = [
@@ -127,7 +127,7 @@ const FacultyAttendance = () => {
 
     try {
       setLoading(true);
-      const response = await axios.get(`/api/attendance/students/${selectedEntry._id}`);
+      const response = await axiosInstance.get(`/api/attendance/students/${selectedEntry._id}`);
       setStudents(response.data.data || []);
 
       // Initialize attendance data
@@ -148,7 +148,7 @@ const FacultyAttendance = () => {
     if (!selectedEntry || !selectedDate) return;
 
     try {
-      const response = await axios.get('/api/attendance', {
+      const response = await axiosInstance.get('/api/attendance', {
         params: {
           date: selectedDate
         }
@@ -244,7 +244,7 @@ const FacultyAttendance = () => {
         ...confirmDialog.data,
         headCount: confirmDialog.headCount
       };
-      await axios.post('/api/attendance', dataToSend);
+      await axiosInstance.post('/api/attendance', dataToSend);
 
       setSuccess('Attendance marked successfully!');
       setConfirmDialog({ open: false, data: null, headCount: 0 });

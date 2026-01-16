@@ -27,7 +27,7 @@ import {
   TrendingUp as TrendingUpIcon,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 import TimetableGrid from '../components/Timetable/TimetableGrid';
 
 const ViewTimetable = () => {
@@ -43,7 +43,7 @@ const ViewTimetable = () => {
 
   const fetchTimetable = async () => {
     try {
-      const response = await axios.get(`/api/timetable/${id}`);
+      const response = await axiosInstance.get(`/api/timetable/${id}`);
       setTimetable(response.data.data);
     } catch (error) {
       console.error('Error fetching timetable:', error);

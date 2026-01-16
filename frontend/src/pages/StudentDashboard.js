@@ -17,7 +17,7 @@ import {
 import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import StatCard from '../components/Cards/StatCard';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 
 const StudentDashboard = () => {
   const { user } = useAuth();
@@ -43,8 +43,8 @@ const StudentDashboard = () => {
       
       // Get published timetables for student's department
       const [publishedRes, approvedRes] = await Promise.all([
-        axios.get('/api/timetable?status=published').catch(() => ({ data: { data: [] } })),
-        axios.get('/api/timetable?status=approved').catch(() => ({ data: { data: [] } }))
+        axiosInstance.get('/api/timetable?status=published').catch(() => ({ data: { data: [] } })),
+        axiosInstance.get('/api/timetable?status=approved').catch(() => ({ data: { data: [] } }))
       ]);
 
       const allTimetables = [
@@ -100,7 +100,7 @@ const StudentDashboard = () => {
       try {
         if (user?._id || user?.id) {
           const userId = user._id || user.id;
-          const attendanceRes = await axios.get(`/api/attendance/student/${userId}`);
+          const attendanceRes = await axiosInstance.get(`/api/attendance/student/${userId}`);
           if (attendanceRes.data.statistics) {
             attendance = attendanceRes.data.statistics.attendancePercentage || 0;
           }

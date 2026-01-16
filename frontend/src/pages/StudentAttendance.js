@@ -27,7 +27,7 @@ import {
   TrendingUp as TrendingUpIcon,
 } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 import { format } from 'date-fns';
 import StatCard from '../components/Cards/StatCard';
 
@@ -74,7 +74,7 @@ const StudentAttendance = () => {
         return;
       }
       const userId = user._id || user.id;
-      const response = await axios.get(`/api/attendance/student/${userId}`, { params });
+      const response = await axiosInstance.get(`/api/attendance/student/${userId}`, { params });
       setAttendance(response.data.data || []);
       setStatistics(response.data.statistics || {
         totalClasses: 0,
