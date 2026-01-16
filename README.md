@@ -5,6 +5,10 @@ An intelligent, constraint-based, web-driven scheduling system that generates op
 # Platform Link 
 https://sctscheduler.vercel.app/
 
+# Landing Page attachment
+<img width="1919" height="929" alt="image" src="https://github.com/user-attachments/assets/010ee8ad-dc83-44ba-a3c0-4ef324cc8f87" />
+
+
 ## Features
 
 - **Automated Timetable Generation**: Conflict-free schedules using GA-CSP hybrid optimization
