@@ -10,12 +10,10 @@ import {
   FormControl,
   InputLabel,
 } from '@mui/material';
-import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import TimetableGrid from '../components/Timetable/TimetableGrid';
 
 const FacultyTimetable = () => {
-  const { } = useAuth();
   const [timetables, setTimetables] = useState([]);
   const [selectedTimetable, setSelectedTimetable] = useState(null);
   const [loading, setLoading] = useState(true);

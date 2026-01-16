@@ -35,12 +35,10 @@ import {
   ArrowBack as ArrowBackIcon,
   People as PeopleIcon,
 } from '@mui/icons-material';
-import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import { format } from 'date-fns';
 
 const FacultyAttendance = () => {
-  const { } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');

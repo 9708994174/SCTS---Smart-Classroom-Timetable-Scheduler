@@ -23,11 +23,9 @@ import {
 import {
   Add as AddIcon,
 } from '@mui/icons-material';
-import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 
 const FacultyAvailability = () => {
-  const { } = useAuth();
   const [faculty, setFaculty] = useState(null);
   const [timeslots, setTimeslots] = useState([]);
   const [loading, setLoading] = useState(true);

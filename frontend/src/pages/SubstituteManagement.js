@@ -38,7 +38,6 @@ const SubstituteManagement = () => {
   const [substitutes, setSubstitutes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
-  const [, setSelectedSubstitute] = useState(null);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [timetables, setTimetables] = useState([]);
